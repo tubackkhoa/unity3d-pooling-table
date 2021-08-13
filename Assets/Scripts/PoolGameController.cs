@@ -13,6 +13,7 @@ public class PoolGameController : MonoBehaviour
     public float maxForce;
     public float minForce;
     public Vector3 strikeDirection;
+    public Vector2 touchPosition;
 
     public const float MIN_DISTANCE = 27.5f;
     public const float MAX_DISTANCE = 32f;
@@ -23,8 +24,6 @@ public class PoolGameController : MonoBehaviour
     public Player OtherPlayer;
 
     private bool currentPlayerContinuesToPlay = false;
-
-    public float pressPosX;
 
     // This is kinda hacky but works
     static public PoolGameController GameInstance

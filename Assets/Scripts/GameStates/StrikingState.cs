@@ -22,6 +22,7 @@ namespace GameStates
 
         public override void Update()
         {
+
             if (Input.touchCount > 0)
             {
                 var touch = Input.touches[0];
@@ -29,8 +30,13 @@ namespace GameStates
                 {
                     case TouchPhase.Moved:
                     case TouchPhase.Canceled:
-                        // if still move then waiting for next turn
-                        gameController.currentState = new GameStates.WaitingForStrikeState(gameController);
+                        // discard move by compare with previous state position then waiting for next turn
+                        var y = touch.position.y - gameController.touchPosition.y;
+                        if (y > 50)
+                        {
+                            gameController.touchPosition = touch.position;
+                            gameController.currentState = new GameStates.WaitingForStrikeState(gameController);
+                        }
                         break;
 
                     case TouchPhase.Ended:
