@@ -28,13 +28,15 @@ namespace GameStates
                 var touch = Input.touches[0];
                 switch (touch.phase)
                 {
+                    case TouchPhase.Stationary:
+                        gameController.touchPosition = touch.position;
+                        break;
                     case TouchPhase.Moved:
                     case TouchPhase.Canceled:
                         // discard move by compare with previous state position then waiting for next turn
                         var y = touch.position.y - gameController.touchPosition.y;
                         if (y > 50)
                         {
-                            gameController.touchPosition = touch.position;
                             gameController.currentState = new GameStates.WaitingForStrikeState(gameController);
                         }
                         break;
@@ -43,6 +45,7 @@ namespace GameStates
                         // then strike
                         gameController.currentState = new GameStates.StrikeState(gameController);
                         break;
+
                 }
             }
 

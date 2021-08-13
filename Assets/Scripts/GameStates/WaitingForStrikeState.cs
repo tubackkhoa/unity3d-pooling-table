@@ -31,6 +31,7 @@ namespace GameStates
                 switch (touch.phase)
                 {
                     case TouchPhase.Began:
+                    case TouchPhase.Stationary:
                         gameController.touchPosition = touch.position;
                         break;
                     case TouchPhase.Moved:
@@ -39,7 +40,6 @@ namespace GameStates
                         if (y < -100)
                         {
                             Debug.DrawLine(cueBall.transform.position, cueBall.transform.position + gameController.strikeDirection * 10);
-                            gameController.touchPosition = touch.position;
                             gameController.currentState = new GameStates.StrikingState(gameController);
                         }
                         else if (x != 0)
